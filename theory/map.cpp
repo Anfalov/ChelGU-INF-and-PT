@@ -33,12 +33,12 @@ int main()
 		cout << e.first << " " << e.second << endl;
 	cout << endl;
 
-	mp["three"] = 3;
+	mp["three"] = 3; // изменит элемент
 	for (auto e : mp) // e - pair<string, int>
 		cout << e.first << " " << e.second << endl;
 	cout << endl;
 
-	mp.insert({ "three", 100 });
+	mp.insert({ "three", 100 }); // не изменит элемент
 	for (auto &e : mp) // проход по ссылке, теперь имеет смысл
 		// даже при небольших объектах в структуре,
 		// так как теперь можно изменять second
@@ -48,6 +48,9 @@ int main()
 		// проход по ссылке
 		cout << e.first << " " << e.second << endl;
 	cout << endl;
+	
+	cout << mp["ten"] << endl; // Если элемента с таким ключом не было в сет,
+	// он автоматически создаётся со стандартным value (0 для int)
 
 	// mp.erase(4); нельзя удалять по значению
 	mp.erase("four");
