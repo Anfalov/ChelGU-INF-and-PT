@@ -17,9 +17,11 @@ struct node
 };
 
 struct mylist {
+	int size;
 	node *begin, *end, *rbegin, *rend;
 	mylist()
 	{
+		size = 0;
 		begin = rbegin = rend = end = new node;
 		end->left = end;
 		end->right = end;
@@ -34,6 +36,7 @@ struct mylist {
 			begin = new_node;
 		if (it == end)
 			rbegin = new_node;
+		size++;
 	}
 
 	void erase(node* it)
@@ -47,6 +50,7 @@ struct mylist {
 		if (it == rbegin)
 			rbegin = it->left;
 		delete it;
+		size--;
 	}
 
 	node* find(int value)
