@@ -39,10 +39,11 @@ struct mylist {
 		size++;
 	}
 
-	void erase(node* it)
+	node* erase(node* it)
 	{
 		if (it == end)
 			throw invalid_argument("Can't erase end pointer");
+		node* next_it = it->right;
 		it->left->right = it->right;
 		it->right->left = it->left;
 		if (it == begin)
@@ -51,6 +52,7 @@ struct mylist {
 			rbegin = it->left;
 		delete it;
 		size--;
+		return next_it;
 	}
 
 	node* find(int value)
