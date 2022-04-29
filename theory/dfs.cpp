@@ -33,7 +33,9 @@ int main()
 	s--; f--;
 	dfs(s);
 	if (used[f])
-		cout << "We have path from " << s + 1 << " to " << f + 1 << endl;
+		cout << "Vertex " << f + 1
+		<< " is reachable from " << s + 1;
 	else
-		cout << "We have not path from " << s + 1 << " to " << f + 1 << endl;
+		cout << "Vertex " << f + 1
+		<< " is unreachable from " << s + 1;
 }
