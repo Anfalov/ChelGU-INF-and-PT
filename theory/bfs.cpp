@@ -64,5 +64,5 @@ int main()
 	vector<int> pt;
 	path(f, pt);
 	for (int i = 0; i < pt.size(); i++)
-		cout << pt[i] << " ";
+		cout << pt[i] + 1 << " ";
 }
