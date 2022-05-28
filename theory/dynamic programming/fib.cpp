@@ -1,33 +1,48 @@
-#include<iostream>
 #include<vector>
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
-int fib(int n) {
+// "Тупое" рекурсивное решение
+int fib_rec(int n) {
 	if (n < 2)
 		return n;
-	return fib(n - 1) + fib(n - 2);
+	return fib_rec(n - 1) + fib_rec(n - 2);
 }
 
-vector<int> v(100, -1);
-int fib2(int n) {
-	if (v[n] == -1)
-		v[n] = fib2(n - 1) + fib2(n - 2);
-	return v[n];
+// Ленивая динамика (Нисходящее ДП)
+vector<int> f(30, -1);
+int fib(int n) {
+	if (f[n] == -1)
+		f[n] = fib(n - 1) + fib(n - 2);
+	return f[n];
 }
 
-int main() {
-	v[0] = 0;
-	v[1] = 1;
-	int n;
-	cin >> n;
-	cout << fib2(n) << endl;
+int main()
+{
+	cout << fib_rec(6) << " ";
+	f[0] = 0;
+	f[1] = 1;
+	cout << fib(6) << " ";
 
-	vector<int> v2(n + 1);
-	v2[0] = 0;
-	if (n > 0)
-		v2[1] = 1;
-	for (int i = 2; i <= n; i++)
-		v2[i] = v2[i - 1] + v2[i - 2];
-	cout << v2[n] << endl;
+	// Восходящее ДП
+	
+	// Прямой порядок
+	vector<int> f2(30);
+	f2[0] = 0;
+	f2[1] = 1;
+	for (int i = 2; i <= 6; i++)
+		f2[i] = f2[i - 1] + f2[i - 2];
+	cout << f2[6] << " ";
+
+	// Обратный порядок
+	vector<int> f3(30);
+	f3[0] = 0;
+	f3[1] = 1;
+	for (int i = 1; i < 6; i++) {
+		f3[i + 1] += f3[i];
+		f3[i + 2] += f3[i];
+	}
+	cout << f3[6] << endl;
 }
